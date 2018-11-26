@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.1/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        {#<link rel="stylesheet" href="{{ asset('basic.css') }}">#}
+        {% block stylesheets %}{% endblock %}
+        <!-- Compiled and minified CSS -->
+        <!-- Compiled and minified JavaScript -->
+    </head>
+    <body>
+        <div class="container">
+            <nav class="red accent-2 fullWidth fixed top left centered-child first-index">
+                <div class="nav-wrapper width70">
+                    <span class="brand-logo">blog</span>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        {% block navLinks %}{% endblock %}
+                    </ul>
+                </div>
+            </nav>
+            {% block body %}{% endblock %}
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.1/js/materialize.min.js"></script>
+        {% block javascripts %}
+        {% endblock %}
+    </body>
+</html>

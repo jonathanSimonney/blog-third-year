@@ -12,11 +12,12 @@ change your `.env` file `DATABASE_URL` var to the url to connect to the database
 
 generate the database with  
 `php bin/console doctrine:schema:update --force`
+
+and load some dummy dta in it with `php bin/console doctrine:fixtures:load`
    
 ## admin user
-create a soon to-be admin user with `php bin/console fos:user:create`, 
-(you will be prompted for his informations), and effectively give him the admin role by running
-`php bin/console fos:user:promote` and choosing `ROLE_ADMIN` when asked for the role.
+The automatically generated admin user has the email `admin@gmail.com` and
+the password `password`
 
 ## launching the server
 The last step is now to run the server by running
