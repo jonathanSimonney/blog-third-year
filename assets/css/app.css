@@ -1,0 +1,54 @@
+.ticket_title {
+    width: max-content;
+}
+
+.fixed-action-btn {
+    position: relative;
+}
+
+.fixed-action-btn ul {
+    position: relative;
+    bottom: 0;
+}
+
+.fixed-action-btn ul .btn-floating{
+    border-radius: 0px;
+}
+
+.row .col.s1.btn-floating {
+    width: 65px;
+    padding: 0;
+}
+
+.fixed{
+    position: fixed;
+}
+
+.fullWidth{
+    width: 100vw;
+}
+
+.top{
+    top: 0;
+}
+
+.left{
+    left: 0;
+}
+
+.centered-child{
+    display: flex;
+    justify-content:center;
+}
+
+.width70{
+    width:70%;
+}
+
+.first-index{
+    z-index: 15;
+}
+
+.container{
+    margin-top: 110px;
+}

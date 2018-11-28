@@ -19,6 +19,10 @@ and load some dummy dta in it with `php bin/console doctrine:fixtures:load`
 The automatically generated admin user has the email `admin@gmail.com` and
 the password `password`
 
+## assets setup
+Since this project uses encore, don't forget to run `yarn encore dev` (if you're in a development
+environment) or `yarn encore production` (if you're in a production environment)
+
 ## launching the server
 The last step is now to run the server by running
 `php bin/console server:run`
