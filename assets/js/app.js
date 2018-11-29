@@ -11,8 +11,17 @@ require('../css/app.css');
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // var $ = require('jquery');
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+function initForms(){
+    let formElems = document.querySelectorAll('select');
+    M.FormSelect.init(formElems);
+}
+
+function initSidenav(){
+    let elems = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(elems);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    let elems = document.querySelectorAll('select');
-    let instances = M.FormSelect.init(elems, options);
+    initForms();
+    initSidenav();
 });
