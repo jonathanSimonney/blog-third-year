@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block navLinks %}
+    {{ parent() }}
+    <li><a href="{{ path('register') }}">register</a></li>
+{% endblock %}
+
 {% block body %}
     {% if error %}
         <div class="error">wrong username/password</div>
