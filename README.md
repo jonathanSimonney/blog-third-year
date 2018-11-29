@@ -13,12 +13,24 @@ change your `.env` file `DATABASE_URL` var to the url to connect to the database
 generate the database with  
 `php bin/console doctrine:schema:update --force`
 
-and load some dummy dta in it with `php bin/console doctrine:fixtures:load`
+and load some dummy data in it with `php bin/console doctrine:fixtures:load`
    
 ## admin user
 The automatically generated admin user has the email `admin@gmail.com` and
 the password `password`
 
+## other default user
+An author is also automatically generated, with some articles written, and some commentary
+written on his article. 
+
+there is : 
+
+- an author whose email is : `author@gmail.com`
+- two simple users (who commented or not), whose emails are : `commenter@gmail.com`
+and `stalker@gmail.com`
+
+
+All users have the same password : `password`
 ## assets setup
 Since this project uses encore, don't forget to run `yarn encore dev` (if you're in a development
 environment) or `yarn encore production` (if you're in a production environment)
