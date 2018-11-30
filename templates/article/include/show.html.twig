@@ -1,0 +1,15 @@
+<div class="section" >
+    <h2 class="row" >
+        <a class="article_title red-text text-darken-1" href="#">{{ article.title }}</a>
+    </h2>
+    <p class="row">
+        <blockquote class="flow-text">
+            {{ article.content| nl2br }}
+        </blockquote>
+    </p>
+
+    <div class="row">
+        <h6>created the {{ article.createdAt|date('Y-m-d H:i:s') }} by {{ article.author }}</h6>
+    </div>
+    <span>{{article.comments.count()}} comments </span> {# FIXME: comment / comments #}
+</div>

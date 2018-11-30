@@ -15,8 +15,10 @@ class ArticleController extends AbstractController
      */
     public function index()
     {
+        $em = $this->getDoctrine()->getManager();
+        $articleList = $em->getRepository('App:Article')->findAll();
         return $this->render('article/index.html.twig', [
-            'controller_name' => 'ArticleController',
+            'articles' => $articleList,
         ]);
     }
 }
