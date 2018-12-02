@@ -1,7 +1,6 @@
 {% extends 'navlinks_ready_base.html.twig' %}
 
 {% block navLinks %}
-    <li><a href="{{ path('article_list') }}">back to the list</a></li>
     {{ parent() }}
 {% endblock %}
 
@@ -46,13 +45,21 @@
     <div class="row">
         <span>{{article.comments.count()}} comments </span> {# FIXME: comments/comment #}
     </div>
-    {#<div class="row">#}
-        {#{{ form_start(new_message_form) }}#}
-        {#<button class="red accent-2 btn waves-effect waves-light" type="submit" name="action">#}
-            {#Create#}
-        {#</button>#}
-        {#{{ form_end(new_message_form) }}#}
-    {#</div>#}
+
+    {% if new_comment_form %}
+        <div class="row">
+            {{ form_start(new_comment_form) }}
+            {{ form_row(new_comment_form.content) }}
+            <button class="red accent-2 btn waves-effect waves-light" type="submit" name="action">
+                add comment
+            </button>
+            {{ form_end(new_comment_form) }}
+        </div>
+    {% else %}
+        <div class="row">
+            <span>Please login to join the discussion.</span>
+        </div>
+    {% endif %}
 
     {% for comment in article.comments %}
         <div class="text-flow">

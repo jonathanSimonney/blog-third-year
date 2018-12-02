@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
+use App\Form\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -33,10 +35,14 @@ class ArticleController extends AbstractController
     public function showAction(Article $article)
     {
         //$deleteForm = $this->createDeleteForm($ticket);
-//        $message = new Message();
-//        $messageForm = $this->createForm(MessageType::class, $message, array(
-//            'action' => $this->generateUrl('message_new', ['id' => $ticket->getId()])
-//        ));
+        $commentForm = false;
+
+        if ($this->isGranted('ROLE_USER')){
+            $comment = new Comment();
+            $commentForm = $this->createForm(CommentType::class, $comment, array(
+                'action' => $this->generateUrl('comment_new', ['id' => $article->getId()])
+            ))->createView();
+        }
         //$article->getComments();
 //        $arrayDeleteMessageForm = [];
 //        foreach ($ticketMessages as $ticketMessage) {
@@ -46,7 +52,7 @@ class ArticleController extends AbstractController
         return $this->render('article/single.html.twig', array(
             'article' => $article,
 //            'delete_form' => $deleteForm->createView(),
-//            'new_message_form' => $messageForm->createView(),
+            'new_comment_form' => $commentForm,
 //            'delete_message_forms' => $arrayDeleteMessageForm
         ));
     }
