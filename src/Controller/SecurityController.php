@@ -69,7 +69,10 @@ class SecurityController extends AbstractController
     public function myAccount(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = $this->getUser();
-        $form = $this->createForm(UserType::class, $user, array('is_edit' => true));
+        $form = $this->createForm(UserType::class, $user, array(
+            'is_edit' => true,
+            'validation_groups' => ['Default', 'edition'],
+        ));
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
