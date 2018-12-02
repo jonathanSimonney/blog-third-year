@@ -5,8 +5,7 @@
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         {#todo add link to profile, forms, etc.#}
-        {% block authenticated_navlinks %}
-        {% endblock %}
+        <li><a href="{{ path('my_account') }}">my account</a></li>
         <li><a href="{{ path('logout') }}">logout</a></li>
     {% else %}
         <li><a href="{{ path('login') }}">login</a></li>

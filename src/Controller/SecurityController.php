@@ -64,6 +64,39 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/account", name="my_account")
+     */
+    public function myAccount(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(UserType::class, $user, array('is_edit' => true));
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // 3) Encode the password (you could also do this via Doctrine listener)
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+            // 4) save the User!
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+
+            return $this->redirectToRoute('article_list');
+        }
+
+        return $this->render(
+            'security/account.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    /**
      * @Route("/logout", name="logout")
      */
     public function logout()

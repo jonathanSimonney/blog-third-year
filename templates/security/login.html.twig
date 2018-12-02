@@ -1,9 +1,5 @@
-{% extends 'base.html.twig' %}
+{% extends 'navlinks_ready_base.html.twig' %}
 
-{% block navLinks %}
-    {{ parent() }}
-    <li><a href="{{ path('register') }}">register</a></li>
-{% endblock %}
 
 {% block body %}
     {% if error %}

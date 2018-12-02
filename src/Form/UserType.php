@@ -15,7 +15,11 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, array('disabled' => $options['is_edit']));//currently disabled in edition because validation mail isn't implemented
+            if ($options['is_edit']){
+                $builder->add('currentPassword', PasswordType::class);
+            }
+        $builder
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
@@ -28,6 +32,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'is_edit'    => false,
         ]);
     }
 }

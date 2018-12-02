@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -37,6 +38,13 @@ class User implements UserInterface
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
+
+    /**
+     * @SecurityAssert\UserPassword(
+     *     message = "Wrong value for your current password"
+     * )
+     */
+    private $currentPassword;
 
     /**
      * @var string The hashed password
@@ -104,6 +112,16 @@ class User implements UserInterface
         $this->roles = $roles;
 
         return $this;
+    }
+
+    public function getCurrentPassword()
+    {
+        return $this->currentPassword;
+    }
+
+    public function setCurrentPassword($password)
+    {
+        $this->currentPassword = $password;
     }
 
     public function getPlainPassword()
