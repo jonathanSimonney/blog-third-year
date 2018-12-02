@@ -75,6 +75,9 @@ class Comment
     }
 
     public function isDeletionAllowedBy(User $user){
-        return $user->hasRole('ROLE_ADMIN') || $this->getAuthor()->getId() === $user->getId();
+        return
+            $user->hasRole('ROLE_ADMIN')
+            || $this->getArticle()->getAuthor()->getId() === $user->getId()
+            || $this->getAuthor()->getId() === $user->getId();
     }
 }
