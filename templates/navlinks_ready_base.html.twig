@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block navLinks %}
+    {{ parent() }}
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {#todo add link to profile, forms, etc.#}
+        {% block authenticated_navlinks %}
+        {% endblock %}
+        <li><a href="{{ path('logout') }}">logout</a></li>
+    {% else %}
+        <li><a href="{{ path('login') }}">login</a></li>
+        <li><a href="{{ path('register') }}">register</a></li>
+    {% endif %}
+{% endblock %}

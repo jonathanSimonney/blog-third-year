@@ -1,6 +1,6 @@
 <div class="section" >
     <h2 class="row" >
-        <a class="article_title red-text text-darken-1" href="#">{{ article.title }}</a>
+        <a class="article_title red-text text-darken-1" href="{{ path('article_show', { 'id': article.id }) }}">{{ article.title }}</a>
     </h2>
     <p class="row">
         <blockquote class="flow-text">
