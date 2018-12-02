@@ -35,6 +35,7 @@ class ArticleController extends AbstractController
     public function showAction(Article $article)
     {
         //$deleteForm = $this->createDeleteForm($ticket);
+        $arrayDeleteCommentForm = [];
         $commentForm = false;
 
         if ($this->isGranted('ROLE_USER')){
@@ -42,18 +43,37 @@ class ArticleController extends AbstractController
             $commentForm = $this->createForm(CommentType::class, $comment, array(
                 'action' => $this->generateUrl('comment_new', ['id' => $article->getId()])
             ))->createView();
+
+            $articleComments = $article->getComments();
+            $currentUser = $this->getUser();
+            foreach ($articleComments as $existingComment) {
+                if ($existingComment->isDeletionAllowedBy($currentUser)){
+                    $deleteCommentForm = $this->createCommentDeleteForm($existingComment);
+                    $arrayDeleteCommentForm[$existingComment->getId()] = $deleteCommentForm;
+                }
+            }
         }
-        //$article->getComments();
-//        $arrayDeleteMessageForm = [];
-//        foreach ($ticketMessages as $ticketMessage) {
-//            $deleteMessageForm = $this->createMessageDeleteForm($ticketMessage);
-//            $arrayDeleteMessageForm[$ticketMessage->getId()] = $deleteMessageForm;
-//        }
         return $this->render('article/single.html.twig', array(
             'article' => $article,
 //            'delete_form' => $deleteForm->createView(),
             'new_comment_form' => $commentForm,
-//            'delete_message_forms' => $arrayDeleteMessageForm
+            'delete_comment_forms' => $arrayDeleteCommentForm
         ));
+    }
+
+    /**
+     * Creates a form to delete a comment entity.
+     *
+     * @param Comment $comment The comment entity
+     *
+     * @return \Symfony\Component\Form\FormInterface The form
+     */
+    private function createCommentDeleteForm(Comment $comment)
+    {
+        return $this->createFormBuilder()
+            ->setMethod('DELETE')
+            ->setAction($this->generateUrl('comment_delete', array('id' => $comment->getId())))
+            ->getForm()
+            ;
     }
 }

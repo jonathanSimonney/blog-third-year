@@ -73,4 +73,8 @@ class Comment
 
         return $this;
     }
+
+    public function isDeletionAllowedBy(User $user){
+        return $user->hasRole('ROLE_ADMIN') || $this->getAuthor()->getId() === $user->getId();
+    }
 }

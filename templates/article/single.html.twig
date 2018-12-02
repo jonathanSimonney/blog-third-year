@@ -68,14 +68,13 @@
         <span>By : {{comment.author}}</span>
         <div class="row">
 
-            {#{% if is_granted('ROLE_ADMIN') %}#}
-                {#<a class="col s2 red accent-2 btn waves-effect waves-light" href="{{ path('message_edit', { 'id': message.id }) }}">Edit</a>#}
-                {#{{ form_start(delete_message_forms[message.id].createView()) }}#}
-                {#<button class="col s2 red accent-2 offset-s1 btn waves-effect waves-light" type="submit" name="action">#}
-                    {#Delete#}
-                {#</button>#}
-                {#{{ form_end(delete_message_forms[message.id].createView()) }}#}
-            {#{% endif %}#}
+            {% if delete_comment_forms[comment.id] is defined %}
+                {{ form_start(delete_comment_forms[comment.id].createView()) }}
+                <button class="col s2 red accent-2 offset-s1 btn waves-effect waves-light" type="submit" name="action">
+                    Delete
+                </button>
+                {{ form_end(delete_comment_forms[comment.id].createView()) }}
+            {% endif %}
         </div>
         <div class="divider"></div><br />
     {% endfor %}
