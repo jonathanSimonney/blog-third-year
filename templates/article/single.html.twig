@@ -65,7 +65,7 @@
         <div class="text-flow">
             {{comment.content| nl2br}}
         </div><br />
-        <span>By : {{comment.author}}</span>
+        <span>By : <a href="{{ path('profile', { 'id': comment.author.id }) }}">{{comment.author}}</a></span>
         <div class="row">
 
             {% if delete_comment_forms[comment.id] is defined %}

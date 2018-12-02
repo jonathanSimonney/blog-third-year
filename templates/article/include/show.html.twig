@@ -9,7 +9,7 @@
     </p>
 
     <div class="row">
-        <h6>created the {{ article.createdAt|date('Y-m-d H:i:s') }} by {{ article.author }}</h6>
+        <h6>created the {{ article.createdAt|date('Y-m-d H:i:s') }} by <a href="{{ path('profile', { 'id': article.author.id }) }}">{{article.author}}</a></h6>
     </div>
     <span>{{article.comments.count()}} comments </span> {# FIXME: comment / comments #}
 </div>

@@ -1,16 +1,7 @@
 {% extends 'navlinks_ready_base.html.twig' %}
 
 {% block body %}
-    <h1>Articles</h1>
+    <h1>Articles{% if author is defined %} written by {{ author }} {% endif %}</h1>
 
-    {% if articles is empty %}
-        <div  class="row">
-            There isn't any article currently.
-        </div>
-    {% else %}
-        {% for article in articles %}
-            {% include "article/include/show.html.twig" %}
-            <div class="divider"></div>
-        {% endfor %}
-    {% endif %}
+    {% include 'article/include/list.html.twig' %}
 {% endblock %}

@@ -43,3 +43,5 @@ security:
         - { path: ^/register, allow_if: "!has_role('ROLE_USER')" }
         - { path: ^/account, allow_if: "has_role('ROLE_USER')" }
         - { path: ^/comment, allow_if: "has_role('ROLE_USER')" }
+        - { path: ^/article/new, allow_if: "has_role('ROLE_BLOGGER')" }
+        - { path: ^/article/edit, allow_if: "has_role('ROLE_BLOGGER')" }

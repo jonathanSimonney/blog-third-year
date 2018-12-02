@@ -1,0 +1,10 @@
+{% if articles is empty %}
+    <div  class="row">
+        There isn't any article currently.
+    </div>
+{% else %}
+    {% for article in articles %}
+        {% include "article/include/show.html.twig" %}
+        <div class="divider"></div>
+    {% endfor %}
+{% endif %}
