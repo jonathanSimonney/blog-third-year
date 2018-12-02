@@ -26,11 +26,11 @@ class ArticleFixture extends Fixture
 
 
         // $product = new Product();
-        $commentedArticle = $this->getNewArticle("un article avec commentaires", "<p>Beaucoup de lorem ipsum, avec </p> <p>des paragraphes qui ne veulent rien dire</p>", $author, new \DateTime('now'));
+        $commentedArticle = $this->getNewArticle("un article avec commentaires", "Beaucoup de lorem ipsum, \n avec des paragraphes \n qui ne veulent rien dire Beaucoup de lorem ipsum, \n avec des paragraphes \n qui ne veulent rien dire Beaucoup de lorem ipsum, \n avec des paragraphes \n qui ne veulent rien dire", $author, new \DateTime('now'));
 
         $this->addCommentToArticle("commentaire nul", $commenter, $commentedArticle);
 
-        $uncommentedArticle = $this->getNewArticle("un article sans commentaires", "<p>Beaucoup moins de lorem ipsum, avec </p> <p>des paragraphes qui ne veulent toujours rien dire</p>", $author, new \DateTime('now'));
+        $uncommentedArticle = $this->getNewArticle("un article sans commentaires", "Beaucoup \n moins de lorem ipsum, avec \n des paragraphes qui ne veulent toujours rien dire", $author, new \DateTime('now'));
 
 
         $manager->persist($author);

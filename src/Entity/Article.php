@@ -132,4 +132,8 @@ class Article
 
         return $this;
     }
+
+    public function getPreview(){
+        return substr(str_replace("\n", " ", $this->getContent()) , 0, 30) . "...";
+    }
 }
