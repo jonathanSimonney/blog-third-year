@@ -133,6 +133,10 @@ class Article
         return $this;
     }
 
+    public function isEditableByUser(User $user){
+        return $user->hasRole('ROLE_ADMIN') || $user->getId() === $this->getAuthor()->getId();
+    }
+
     public function getPreview(){
         return substr(str_replace("\n", " ", $this->getContent()) , 0, 30) . "...";
     }

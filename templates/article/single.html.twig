@@ -12,22 +12,24 @@
     <div class="row">
         <h6>created the {{ article.createdAt|date('Y-m-d H:i:s') }} by {{ article.author }}</h6>
     </div>
-    {#{% if is_granted('ROLE_ADMIN') %}#}
-        {#<div class="row fixed-action-btn">#}
-            {#<a class="col s1 btn-floating btn-large red accent-2">#}
-                {#<i class="large material-icons">drag_handle</i>#}
-            {#</a>#}
-            {#<ul>#}
-                {#<li>#}
-                    {#<a class="col s3 offset-s1 red accent-2 btn btn-floating waves-effect waves-light " href="{{ path('ticket_index') }}">Back to the list</a>#}
-                {#</li>#}
-
-                {#<li>#}
-                    {#<a class="col s2 offset-s1 red accent-2 btn btn-floating waves-effect waves-light" href="{{ path('ticket_edit', { 'id': ticket.id }) }}">edit</a>#}
-                {#</li>#}
-            {#</ul>#}
-        {#</div>#}
+    {% if show_edit_link %}
+        <div class="row fixed-action-btn">
+            <a class="col s1 btn-floating btn-large red accent-2">
+                <i class="large material-icons">drag_handle</i>
+            </a>
+            <ul>
+                <li>
+                    <a class="col s3 offset-s1 red accent-2 btn btn-floating waves-effect waves-light " href="{{ path('article_list') }}">Back to the list</a>
+                </li>
+                <li>
+                    <a class="col s2 offset-s1 red accent-2 btn btn-floating waves-effect waves-light" href="{{ path('edit_article', { 'id': article.id }) }}">edit</a>
+                </li>
+            </ul>
+        </div>
+    {% else %}
         <a class="col s3 offset-s1 red accent-2 btn waves-effect waves-light " href="{{ path('article_list') }}">Back to the list</a>
+    {% endif %}
+
     <div class="row">
         <span>{{article.comments.count()}} comments </span> {# FIXME: comments/comment #}
     </div>

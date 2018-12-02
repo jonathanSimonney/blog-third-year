@@ -22,6 +22,10 @@ class ArticleType extends AbstractType
                 'disabled' => !$options['isAdmin'])
             )
         ;
+
+        if ($options['isEdit']){
+            $builder->setMethod('PATCH');
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -29,6 +33,7 @@ class ArticleType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Article::class,
             'isAdmin'    => false,
+            'isEdit'     => false,
         ]);
     }
 }

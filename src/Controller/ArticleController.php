@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -54,6 +55,38 @@ class ArticleController extends AbstractController
     }
 
     /**
+     * create a new article entity.
+     *
+     * @Route("/edit/{id}", name="edit_article", methods={"GET", "PATCH"})
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function editAction(Request $request, Article $article)
+    {
+        if ($article->isEditableByUser($this->getUser())){
+            $options = array(
+                'isAdmin' => $this->isGranted('ROLE_ADMIN'),
+                'isEdit'  => true,
+            );
+            $form = $this->createForm('App\Form\ArticleType', $article, $options);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($article);
+                $em->flush();
+                return $this->redirectToRoute('article_show', array('id' => $article->getId()));
+            }
+            return $this->render('article/new.html.twig', array(
+                'article' => $article,
+                'form' => $form->createView(),
+                'isEdit' => true,
+            ));
+        }else{
+            throw new AccessDeniedException("You can't edit that article. If you are admin or the author of the article, this is a bug.");
+        }
+    }
+
+    /**
      * Finds and displays an article entity.
      *
      * @Route("/{id}", name="article_show", methods={"GET"})
@@ -64,6 +97,7 @@ class ArticleController extends AbstractController
     {
         $arrayDeleteCommentForm = [];
         $commentForm = false;
+        $showEditLink = false;
 
         if ($this->isGranted('ROLE_USER')){
             $comment = new Comment();
@@ -79,11 +113,14 @@ class ArticleController extends AbstractController
                     $arrayDeleteCommentForm[$existingComment->getId()] = $deleteCommentForm;
                 }
             }
+
+            $showEditLink = $article->isEditableByUser($this->getUser());
         }
         return $this->render('article/single.html.twig', array(
             'article' => $article,
             'new_comment_form' => $commentForm,
-            'delete_comment_forms' => $arrayDeleteCommentForm
+            'delete_comment_forms' => $arrayDeleteCommentForm,
+            'show_edit_link'       => $showEditLink,
         ));
     }
 
