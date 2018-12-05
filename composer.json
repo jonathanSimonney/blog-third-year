@@ -63,7 +63,7 @@
         ],
         "compile": [
             "php bin/console doctrine:migrations:migrate",
-            "node_modules/.bin/encore production",
+            "node_modules/.bin/encore production"
         ]
     },
     "conflict": {
