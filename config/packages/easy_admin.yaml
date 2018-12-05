@@ -1,0 +1,18 @@
+easy_admin:
+    site_name: "blog zamor"
+    entities:
+        # List the entity class name you want to manage
+        Comment:
+            class: App\Entity\Comment
+        Article:
+            class: App\Entity\Article
+        User:
+            controller: App\Controller\UserAdminController
+            class: App\Entity\User
+            form:
+                fields:
+                    - 'email'
+                    - { property: 'roles', type: 'App\Form\Type\RoleListType' }
+            new:
+                fields:
+                    - { property: 'plainPassword', type: 'password' }

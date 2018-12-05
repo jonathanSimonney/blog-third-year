@@ -140,4 +140,9 @@ class Article
     public function getPreview(){
         return substr(str_replace("\n", " ", $this->getContent()) , 0, 30) . "...";
     }
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 }

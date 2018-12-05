@@ -80,4 +80,9 @@ class Comment
             || $this->getArticle()->getAuthor()->getId() === $user->getId()
             || $this->getAuthor()->getId() === $user->getId();
     }
+
+    public function __toString()
+    {
+        return $this->getContent();
+    }
 }
