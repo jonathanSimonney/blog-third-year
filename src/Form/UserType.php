@@ -40,7 +40,7 @@ class UserType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'is_edit'    => false,
-            'validation_groups' => array('Default'),
+            'validation_groups' => array('Default', 'register'),
         ]);
     }
 }

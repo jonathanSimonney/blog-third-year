@@ -16,3 +16,4 @@ easy_admin:
             new:
                 fields:
                     - { property: 'plainPassword', type: 'password' }
+                form_options: { validation_groups: ['Default', 'register'] }

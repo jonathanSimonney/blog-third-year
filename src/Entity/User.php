@@ -37,7 +37,9 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     *     groups={"register"}
+     * )
      * @Assert\Length(min=7, max=4096, minMessage="Your password must be at least 7 characters long")
      */
     private $plainPassword;
