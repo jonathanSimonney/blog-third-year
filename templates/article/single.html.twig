@@ -67,4 +67,10 @@
         <div class="divider"></div><br />
     {% endfor %}
 
+    <div id="map-elem"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('geolocPage') }}
 {% endblock %}
