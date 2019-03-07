@@ -2,7 +2,7 @@
     <span>{{comments.count()}} comments </span> {# FIXME: comments/comment #}
 </div>
 
-{% if can_comment %}
+{% if new_comment_form %}
     <div class="row">
         {{ form_start(new_comment_form) }}
         {{ form_row(new_comment_form.content) }}
