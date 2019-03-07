@@ -1,0 +1,10 @@
+{% if projects is empty %}
+    <div  class="row">
+        There isn't any project currently.
+    </div>
+{% else %}
+    {% for project in projects %}
+        {% include "project/include/show.html.twig" %}
+        <div class="divider"></div>
+    {% endfor %}
+{% endif %}

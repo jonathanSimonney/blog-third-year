@@ -3,6 +3,7 @@
 {% block navLinks %}
     {{ parent() }}
     <li><a href="{{ path('article_list') }}">article</a></li>
+    <li><a href="{{ path('project_list') }}">project</a></li>
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         {% if is_granted('ROLE_BLOGGER') %}

@@ -30,41 +30,42 @@
         <a class="col s3 offset-s1 red accent-2 btn waves-effect waves-light " href="{{ path('article_list') }}">Back to the list</a>
     {% endif %}
 
-    <div class="row">
-        <span>{{article.comments.count()}} comments </span> {# FIXME: comments/comment #}
-    </div>
+    {% include "comment/include/comment_section.html.twig" with {'comments': article.comments} %}
+    {#<div class="row">#}
+        {#<span>{{article.comments.count()}} comments </span> #}{# FIXME: comments/comment #}
+    {#</div>#}
 
-    {% if new_comment_form %}
-        <div class="row">
-            {{ form_start(new_comment_form) }}
-            {{ form_row(new_comment_form.content) }}
-            <button class="red accent-2 btn waves-effect waves-light" type="submit" name="action">
-                add comment
-            </button>
-            {{ form_end(new_comment_form) }}
-        </div>
-    {% else %}
-        <div class="row">
-            <span>Please login to join the discussion.</span>
-        </div>
-    {% endif %}
+    {#{% if new_comment_form %}#}
+        {#<div class="row">#}
+            {#{{ form_start(new_comment_form) }}#}
+            {#{{ form_row(new_comment_form.content) }}#}
+            {#<button class="red accent-2 btn waves-effect waves-light" type="submit" name="action">#}
+                {#add comment#}
+            {#</button>#}
+            {#{{ form_end(new_comment_form) }}#}
+        {#</div>#}
+    {#{% else %}#}
+        {#<div class="row">#}
+            {#<span>Please login to join the discussion.</span>#}
+        {#</div>#}
+    {#{% endif %}#}
 
-    {% for comment in article.comments %}
-        <div class="text-flow">
-            {{comment.content| nl2br}}
-        </div><br />
-        <span>By : <a href="{{ path('profile', { 'id': comment.author.id }) }}">{{comment.author}}</a></span>
-        <div class="row">
+    {#{% for comment in article.comments %}#}
+        {#<div class="text-flow">#}
+            {#{{comment.content| nl2br}}#}
+        {#</div><br />#}
+        {#<span>By : <a href="{{ path('profile', { 'id': comment.author.id }) }}">{{comment.author}}</a></span>#}
+        {#<div class="row">#}
 
-            {% if delete_comment_forms[comment.id] is defined %}
-                {{ form_start(delete_comment_forms[comment.id].createView()) }}
-                <button class="col s2 red accent-2 offset-s1 btn waves-effect waves-light" type="submit" name="action">
-                    Delete
-                </button>
-                {{ form_end(delete_comment_forms[comment.id].createView()) }}
-            {% endif %}
-        </div>
-        <div class="divider"></div><br />
-    {% endfor %}
+            {#{% if delete_comment_forms[comment.id] is defined %}#}
+                {#{{ form_start(delete_comment_forms[comment.id].createView()) }}#}
+                {#<button class="col s2 red accent-2 offset-s1 btn waves-effect waves-light" type="submit" name="action">#}
+                    {#Delete#}
+                {#</button>#}
+                {#{{ form_end(delete_comment_forms[comment.id].createView()) }}#}
+            {#{% endif %}#}
+        {#</div>#}
+        {#<div class="divider"></div><br />#}
+    {#{% endfor %}#}
 
 {% endblock %}

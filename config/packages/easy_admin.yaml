@@ -6,6 +6,8 @@ easy_admin:
             class: App\Entity\Comment
         Article:
             class: App\Entity\Article
+        Project:
+            class: App\Entity\Project
         User:
             controller: App\Controller\UserAdminController
             class: App\Entity\User
